@@ -1,7 +1,8 @@
-TensorFlow skill testing project
+TensorFlow skill testing project (classification)
 ====
 
-This is for the TensorFlow skills test for Yazabi/SharpestMinds.
+This is for the TensorFlow classification skills test for
+Yazabi/SharpestMinds.
 
 Links:
 ----
