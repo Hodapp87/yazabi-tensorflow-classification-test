@@ -7,7 +7,7 @@ let stdenv = pkgs.stdenv;
     #    tensorflow = tf;
     #};
     python_with_deps = pkgs.python35.withPackages
-      (ps: [ps.cython ps.scipy tf ps.matplotlib ps.pandas
+      (ps: [ps.scipy tf ps.matplotlib ps.pandas ps.scikitlearn
             ps.easydict ps.pillow ps.pyyaml
             ps.pyqt4 # Needed only for matplotlib backend
             ps.pycallgraph ps.graphviz
@@ -19,3 +19,4 @@ in stdenv.mkDerivation rec {
 
   buildInputs = with pkgs; [ python_with_deps ];
 }
+
