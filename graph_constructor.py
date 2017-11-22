@@ -7,6 +7,7 @@
 ###########################################################################
 
 import tensorflow as tf
+import numpy as np
 
 def lr_model_fn(features, labels, mode, params):
     """Model function for an Estimator for a logistic regression
@@ -22,8 +23,8 @@ def lr_model_fn(features, labels, mode, params):
     # Model:
     weights = tf.get_variable(
         "weights", [params["n_features"], params["n_classes"]],
-        dtype=tf.float64)
-    bias = tf.get_variable("bias", [params["n_classes"]], dtype=tf.float64)
+        dtype=tf.float32)
+    bias = tf.get_variable("bias", [params["n_classes"]], dtype=tf.float32)
     # Unnormalized output (logits?):
     logits = tf.matmul(features["x"], weights) + bias
     sm = tf.nn.softmax(logits)

@@ -10,6 +10,7 @@ import data_preprocessing
 import graph_constructor
 
 import tensorflow as tf
+import numpy as np
 
 def train_and_validate(algorithm):
     """This function is mandated by the requirements.  Argument
@@ -52,7 +53,7 @@ def train_and_validate(algorithm):
 
     # Train:
     train_input_fn = tf.estimator.inputs.numpy_input_fn(
-        x={"x": train_X.values},
+        x={"x": train_X.values.astype(np.float32)},
         y=train_y.values - 1,
         num_epochs=epochs,
         shuffle=False)
@@ -60,7 +61,7 @@ def train_and_validate(algorithm):
 
     # Evaluate:
     test_input_fn = tf.estimator.inputs.numpy_input_fn(
-        x={"x": valid_X.values},
+        x={"x": valid_X.values.astype(np.float32)},
         y=valid_y.values - 1,
         num_epochs=1,
         shuffle=False)
