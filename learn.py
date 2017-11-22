@@ -23,6 +23,10 @@ def train_and_validate(algorithm):
     data_preprocessing.standardize(train_X_orig, test_X)
     train_X, valid_X, train_y, valid_y = data_preprocessing.split(
         train_X_orig, train_y_orig)
+    # Simplify things by making labels start at 0:
+    train_y[:] = train_y[:] - 1
+    valid_y[:] = valid_y[:] - 1
+    
     # key = algorithm name, value = (model function, # of epochs, params)
     models = {
         "knn": (graph_constructor.knn_model_fn,
@@ -54,7 +58,7 @@ def train_and_validate(algorithm):
     # Train:
     train_input_fn = tf.estimator.inputs.numpy_input_fn(
         x={"x": train_X.values.astype(np.float32)},
-        y=train_y.values - 1,
+        y=train_y.values,
         num_epochs=epochs,
         shuffle=False)
     est.train(input_fn=train_input_fn)
@@ -62,7 +66,7 @@ def train_and_validate(algorithm):
     # Evaluate:
     test_input_fn = tf.estimator.inputs.numpy_input_fn(
         x={"x": valid_X.values.astype(np.float32)},
-        y=valid_y.values - 1,
+        y=valid_y.values,
         num_epochs=1,
         shuffle=False)
     ev = est.evaluate(input_fn=test_input_fn)
