@@ -43,11 +43,14 @@ def train_and_validate(algorithm):
                        "n_features": train_X.shape[1],
                        "lambda": 0.02,
                      }),
+        # TODO: Play with hyperparameters a bit more.
+        # I can take the number of epochs up even higher without overfitting.
+        # SessionRunHook or something would be a helpful metric while training.
         "2-layer": (graph_constructor.ann_model_fn,
                     100,
-                    { "learning_rate": 0.01,
+                    { "learning_rate": 0.02,
                       "n_classes": 6,
-                      "hidden_units": 200,
+                      "hidden_units": 400,
                     }),
     }
 
